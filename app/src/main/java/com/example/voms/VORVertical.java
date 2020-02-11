@@ -16,7 +16,7 @@ public class VORVertical extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vor_vertical);
 
-        button = (Button) findViewById(R.id.vor_vertical_button);
+        button = findViewById(R.id.vor_vertical_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

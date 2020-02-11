@@ -16,7 +16,7 @@ public class Convergence extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_convergence);
 
-        button = (Button) findViewById(R.id.convergence_button);
+        button = findViewById(R.id.convergence_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

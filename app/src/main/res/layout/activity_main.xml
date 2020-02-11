@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,10 +26,11 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Headache"/>
+                android:text="@string/headache"/>
 
             <EditText
-                android:id="@+id/baseline_headache" />
+                android:id="@+id/baseline_headache"
+                android:inputType="number"/>
 
         </TableRow>
 
@@ -39,10 +39,11 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Dizziness"/>
+                android:text="@string/dizziness" />
 
             <EditText
-                android:id="@+id/baseline_dizziness" />
+                android:id="@+id/baseline_dizziness"
+                android:inputType="number"/>
 
         </TableRow>
 
@@ -51,11 +52,12 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Nausea"/>
+                android:text="@string/nausea"/>
 
 
             <EditText
-                android:id="@+id/baseline_nausea"/>
+                android:id="@+id/baseline_nausea"
+                android:inputType="number"/>
 
         </TableRow>
 
@@ -63,10 +65,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:text="Fogginess"/>
+                android:text="@string/fogginess"/>
 
             <EditText
-                android:id="@+id/baseline_fogginess"/>
+                android:id="@+id/baseline_fogginess"
+                android:inputType="number"/>
 
         </TableRow>
 

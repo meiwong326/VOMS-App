@@ -16,7 +16,7 @@ public class VORHorizontal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vor_horizontal);
 
-        button = (Button) findViewById(R.id.vor_horizontal_button);
+        button = findViewById(R.id.vor_horizontal_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

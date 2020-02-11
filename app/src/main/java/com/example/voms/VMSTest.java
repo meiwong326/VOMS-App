@@ -16,7 +16,7 @@ public class VMSTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vmstest);
 
-        button = (Button) findViewById(R.id.vms_button);
+        button = findViewById(R.id.vms_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

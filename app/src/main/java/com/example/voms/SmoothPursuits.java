@@ -16,7 +16,7 @@ public class SmoothPursuits extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smooth_pursuits);
 
-        button = (Button) findViewById(R.id.smooth_pursuits_button);
+        button = findViewById(R.id.smooth_pursuits_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

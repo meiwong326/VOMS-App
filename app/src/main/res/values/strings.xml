@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">VOMS</string>
+    <string name="convergence">Convergence</string>
+    <string name="headache">Headache</string>
+    <string name="dizziness">Dizziness</string>
+    <string name="nausea">Nausea</string>
+    <string name="fogginess">Fogginess</string>
 </resources>

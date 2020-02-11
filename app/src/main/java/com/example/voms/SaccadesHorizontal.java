@@ -16,7 +16,7 @@ public class SaccadesHorizontal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saccades_horizontal);
 
-        button = (Button) findViewById(R.id.saccades_horizontal_button);
+        button = findViewById(R.id.saccades_horizontal_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

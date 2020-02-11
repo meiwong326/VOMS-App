@@ -16,7 +16,7 @@ public class SaccadesVertical extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saccades_vertical);
 
-        button = (Button) findViewById(R.id.saccades_vertical_button);
+        button = findViewById(R.id.saccades_vertical_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
