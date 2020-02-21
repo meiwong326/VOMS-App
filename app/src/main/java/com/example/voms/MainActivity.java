@@ -12,21 +12,31 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_NUMBER = "com.example.voms.EXTRA_NUMBER";
+    EditText baseDizziness;
+    EditText baseNausea;
+    EditText baseHeadache;
+    EditText baseFogginess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button button = findViewById(R.id.main_activity_button);
+        Button button = findViewById(R.id.main_activity_button);//this is the start button that enters into the first test, smooth pursuits
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Open Smooth Pursuits page
                 Intent intent = new Intent(MainActivity.this, SmoothPursuits.class);
                 startActivity(intent);
+                baseDizziness = (EditText)findViewById(R.id.baseline_dizziness); //when the start button is pressed, the current values are saved as the baseline attributes
+                baseNausea = (EditText)findViewById(R.id.baseline_nausea);
+                baseHeadache = (EditText)findViewById(R.id.baseline_headache);
+                baseFogginess = (EditText)findViewById(R.id.baseline_fogginess);
             }
         });
+
+
     }
 
 }

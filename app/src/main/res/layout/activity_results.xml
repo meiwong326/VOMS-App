@@ -20,5 +20,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dip"/>
 
+    <TextView
+        android:id="@+id/textView3"
+
+
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:text="This will display the result" />
+
 
 </RelativeLayout>
