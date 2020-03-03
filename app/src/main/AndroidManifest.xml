@@ -13,7 +13,7 @@
         android:label="Vestibular/Ocular-Motor Screening"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat">
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="face"/>
