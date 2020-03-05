@@ -165,7 +165,7 @@ public class Convergence extends AppCompatActivity {
 //                    "\nsensor width: "+sensorX
 //                    +"\nd: "+String.format("%.0f",d)+"cm");
 
-            showStatus("distance: "+String.format("%.0f",d)+"cm");
+            showStatus("\ndistance: "+String.format("%.0f",d)+"cm");
         }
 
         @Override

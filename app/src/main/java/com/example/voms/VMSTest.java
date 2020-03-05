@@ -13,6 +13,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -23,8 +24,9 @@ public class VMSTest extends AppCompatActivity implements SensorEventListener{
     private Button button;
 
     private TextView azimuthText;
-    private TextView pitchText;
-    private TextView rollText;
+
+    private ImageView left_arrow;
+    private ImageView right_arrow;
 
     private SensorManager sensorManager;
     private Sensor sensorAccelerometer;
@@ -33,12 +35,11 @@ public class VMSTest extends AppCompatActivity implements SensorEventListener{
     private float[] accelerometerData = new float[3];
     private float[] magnetometerData = new float[3];
     private float[] rotationMatrix = new float[9];
-    private float[] inclinationMatrix = new float[9];
+    private float[] remapMatrix = new float[9];
     private float[] orientationValues = new float[3];
 
-    float azimuth, pitch, roll;
-    double pitchDegrees;
-    double rollDegrees;
+    float azimuth;
+    double azimuthDegrees;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +57,9 @@ public class VMSTest extends AppCompatActivity implements SensorEventListener{
             }
         });
 
-        azimuthText = findViewById(R.id.azimuth);
-        pitchText = findViewById(R.id.pitch);
-        rollText = findViewById(R.id.roll);
+        azimuthText = findViewById(R.id.degreesRotated);
+        left_arrow = findViewById(R.id.arrow_left);
+        right_arrow = findViewById(R.id.arrow_right);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensorAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -82,7 +83,7 @@ public class VMSTest extends AppCompatActivity implements SensorEventListener{
 
     @Override
     protected void onPause() {
-        // Be sure to unregister the sensor when the activity pauses.
+        // Unregister the sensor and metronome when the activity pauses.
         super.onPause();
         sensorManager.unregisterListener(this);
         metronome.stop();
@@ -112,22 +113,30 @@ public class VMSTest extends AppCompatActivity implements SensorEventListener{
         }
 
         boolean rotationSuccess = SensorManager.getRotationMatrix(
-                rotationMatrix, inclinationMatrix, accelerometerData, magnetometerData);
+                rotationMatrix, null, accelerometerData, magnetometerData);
 
         if (rotationSuccess) {
-            SensorManager.getOrientation(rotationMatrix, orientationValues);
+            // Remap the coordinate system since the phone screen is facing the user
+            SensorManager.remapCoordinateSystem(rotationMatrix, SensorManager.AXIS_X, SensorManager.AXIS_Z, remapMatrix);
+            SensorManager.getOrientation(remapMatrix, orientationValues);
 
             azimuth = orientationValues[0];
-            pitch = orientationValues[1];
-            roll = orientationValues[2];
+            azimuthDegrees = Math.toDegrees(azimuth);
 
-            pitchDegrees = Math.toDegrees(pitch);
-            rollDegrees = Math.toDegrees(roll);
+            //azimuthText.setText(String.format("%1.2f", azimuthDegrees));
 
-            azimuthText.setText(String.format("%1.2f", azimuth));
-            pitchText.setText(String.format("%1.2f", pitchDegrees));
-            rollText.setText(String.format("%1.2f", rollDegrees));
+            // If the user has turned 75 degrees to the left, display right arrow
+            if (azimuthDegrees > 75) {
+                left_arrow.setVisibility(View.INVISIBLE);
+                right_arrow.setVisibility(View.VISIBLE);
+            }
+            // If the user has turned 75 degrees to the right, display left arrow
+            if (azimuthDegrees < -75) {
+                right_arrow.setVisibility(View.INVISIBLE);
+                left_arrow.setVisibility(View.VISIBLE);
+            }
         }
+
     }
 
 }
