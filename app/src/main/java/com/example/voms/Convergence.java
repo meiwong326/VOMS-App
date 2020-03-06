@@ -79,7 +79,7 @@ public class Convergence extends AppCompatActivity {
             sensorY = (float) (Math.tan(Math.toRadians(angleY/2))*2*F);
             camera.stopPreview();
             camera.release();
-            textView = findViewById(R.id.convergence_distance);
+            textView = findViewById(R.id.text);
             createCameraSource();
         }
     }
