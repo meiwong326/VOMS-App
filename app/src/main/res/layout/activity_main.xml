@@ -10,14 +10,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Rate baseline symptoms from 0-10"
-        android:layout_above="@id/baseline_table"
+        android:layout_above="@+id/baseline_table"
+        android:layout_centerHorizontal="true"
         android:padding="5dip"/>
 
     <TableLayout
         android:id="@+id/baseline_table"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/main_activity_button"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:stretchColumns="*"
         android:padding="5dip">
 
