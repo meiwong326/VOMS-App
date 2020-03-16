@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
                 // Open Smooth Pursuits page
                 Intent intent = new Intent(MainActivity.this, SmoothPursuits.class);
                 startActivity(intent);
-                baseDizziness = (EditText)findViewById(R.id.baseline_dizziness); //when the start button is pressed, the current values are saved as the baseline attributes
-                baseNausea = (EditText)findViewById(R.id.baseline_nausea);
-                baseHeadache = (EditText)findViewById(R.id.baseline_headache);
-                baseFogginess = (EditText)findViewById(R.id.baseline_fogginess);
+                baseDizziness = findViewById(R.id.baseline_dizziness); //when the start button is pressed, the current values are saved as the baseline attributes
+                baseNausea = findViewById(R.id.baseline_nausea);
+                baseHeadache = findViewById(R.id.baseline_headache);
+                baseFogginess = findViewById(R.id.baseline_fogginess);
             }
         });
 
