@@ -20,7 +20,7 @@ public class SmoothPursuits extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SmoothPursuits.this, SaccadesHorizontal.class);
+                Intent intent = new Intent(SmoothPursuits.this, SmoothPursuitsSymptoms.class);
                 startActivity(intent);
             }
         });

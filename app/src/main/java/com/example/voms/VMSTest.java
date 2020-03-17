@@ -44,7 +44,7 @@ public class VMSTest extends AppCompatActivity implements SensorEventListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vmstest);
+        setContentView(R.layout.activity_vms);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -52,7 +52,7 @@ public class VMSTest extends AppCompatActivity implements SensorEventListener{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VMSTest.this, Results.class);
+                Intent intent = new Intent(VMSTest.this, VMSTestSymptoms.class);
                 startActivity(intent);
             }
         });

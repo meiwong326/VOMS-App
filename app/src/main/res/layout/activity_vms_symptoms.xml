@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VMSTestSymptoms">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rate symptoms from 0-10"
+        android:layout_above= "@id/vms_symptoms_table"
+        android:padding="5dip"/>
+
+    <TableLayout
+        android:id="@+id/vms_symptoms_table"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:stretchColumns="*"
+        android:padding="5dip">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/headache"/>
+
+            <EditText
+                android:id="@+id/vms_headache"
+                android:inputType="number"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/dizziness" />
+
+            <EditText
+                android:id="@+id/vms_dizziness"
+                android:inputType="number"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/nausea"/>
+
+
+            <EditText
+                android:id="@+id/vms_nausea"
+                android:inputType="number"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="@string/fogginess"/>
+
+            <EditText
+                android:id="@+id/vms_fogginess"
+                android:inputType="number"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/vms_symptoms_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="Next"/>
+
+</RelativeLayout>

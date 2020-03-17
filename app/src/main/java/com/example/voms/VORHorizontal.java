@@ -20,7 +20,7 @@ public class VORHorizontal extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VORHorizontal.this, VORVertical.class);
+                Intent intent = new Intent(VORHorizontal.this, VORHorizontalSymptoms.class);
                 startActivity(intent);
             }
         });

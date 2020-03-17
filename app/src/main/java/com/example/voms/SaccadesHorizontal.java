@@ -20,7 +20,7 @@ public class SaccadesHorizontal extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SaccadesHorizontal.this, SaccadesVertical.class);
+                Intent intent = new Intent(SaccadesHorizontal.this, SaccadesHorizontalSymptoms.class);
                 startActivity(intent);
             }
         });

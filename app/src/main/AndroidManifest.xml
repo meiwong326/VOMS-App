@@ -17,18 +17,31 @@
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="face"/>
-        <activity android:name=".VMSTest"></activity>
-        <activity android:name=".Results" />
-        <activity android:name=".VORVertical" />
-        <activity android:name=".VORHorizontal" />
-        <activity android:name=".Convergence" />
-        <activity android:name=".SaccadesVertical" />
-        <activity android:name=".SaccadesHorizontal" />
-        <activity android:name=".SmoothPursuits" />
+        <activity android:name=".VMSTest"/>
+        <activity android:name=".VMSTestInstructions"/>
+        <activity android:name=".VMSTestSymptoms"/>
+        <activity android:name=".Results"/>
+        <activity android:name=".VORVertical"/>
+        <activity android:name=".VORVerticalInstructions"/>
+        <activity android:name=".VORVerticalSymptoms"/>
+        <activity android:name=".VORHorizontal"/>
+        <activity android:name=".VORHorizontalInstructions"/>
+        <activity android:name=".VORHorizontalSymptoms"/>
+        <activity android:name=".Convergence"/>
+        <activity android:name=".ConvergenceInstructions"/>
+        <activity android:name=".ConvergenceSymptoms"/>
+        <activity android:name=".SaccadesVertical"/>
+        <activity android:name=".SaccadesVerticalInstructions"/>
+        <activity android:name=".SaccadesVerticalSymptoms"/>
+        <activity android:name=".SaccadesHorizontal"/>
+        <activity android:name=".SaccadesHorizontalInstructions"/>
+        <activity android:name=".SaccadesHorizontalSymptoms"/>
+        <activity android:name=".SmoothPursuits"/>
+        <activity android:name=".SmoothPursuitsInstructions"/>
+        <activity android:name=".SmoothPursuitsSymptoms"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

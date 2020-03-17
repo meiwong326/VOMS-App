@@ -20,7 +20,7 @@ public class VORVertical extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VORVertical.this, VMSTest.class);
+                Intent intent = new Intent(VORVertical.this, VORVerticalSymptoms.class);
                 startActivity(intent);
             }
         });

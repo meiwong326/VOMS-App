@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Open Smooth Pursuits page
-                Intent intent = new Intent(MainActivity.this, SmoothPursuits.class);
+                Intent intent = new Intent(MainActivity.this, SmoothPursuitsInstructions.class);
                 startActivity(intent);
                 baseDizziness = findViewById(R.id.baseline_dizziness); //when the start button is pressed, the current values are saved as the baseline attributes
                 baseNausea = findViewById(R.id.baseline_nausea);

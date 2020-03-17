@@ -5,4 +5,11 @@
     <string name="dizziness">Dizziness</string>
     <string name="nausea">Nausea</string>
     <string name="fogginess">Fogginess</string>
+    <string name="convergence_instructions"><![CDATA[<insert instructions>]]></string>
+    <string name="saccades_horizontal_instructions"><![CDATA[<insert instructions>]]></string>
+    <string name="saccades_vertical_instructions"><![CDATA[<insert instructions>]]></string>
+    <string name="smooth_pursuits_instructions"><![CDATA[<insert instructions>]]></string>
+    <string name="vms_instructions"><![CDATA[<insert instructions>]]></string>
+    <string name="vor_horizontal_instructions"><![CDATA[<insert instructions>]]></string>
+    <string name="vor_vertical_instructions"><![CDATA[<insert instructions>]]></string>
 </resources>

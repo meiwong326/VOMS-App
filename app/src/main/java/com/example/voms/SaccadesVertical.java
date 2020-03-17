@@ -20,7 +20,7 @@ public class SaccadesVertical extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SaccadesVertical.this, Convergence.class);
+                Intent intent = new Intent(SaccadesVertical.this, SaccadesVerticalSymptoms.class);
                 startActivity(intent);
             }
         });
