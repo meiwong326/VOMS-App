@@ -1,28 +1,20 @@
 package com.example.voms;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.location.Location;
-import android.widget.Toast;
-
 
 public class VMSTest extends AppCompatActivity implements SensorEventListener{
 
@@ -34,9 +26,8 @@ public class VMSTest extends AppCompatActivity implements SensorEventListener{
     private ImageView left_arrow;
     private ImageView right_arrow;
 
-    private Location mLastLocation;
-    private LocationManager locationManager;
-    private LocationProvider locationProvider;
+    private TextView previous;
+    private TextView current;
 
     private SensorManager sensorManager;
     private Sensor sensorAccelerometer;
@@ -47,7 +38,9 @@ public class VMSTest extends AppCompatActivity implements SensorEventListener{
     private float[] rotationMatrix = new float[9];
     private float[] remapMatrix = new float[9];
     private float[] orientationValues = new float[3];
+
     float azimuth;
+    double prevAzimuthDegrees = 1000;
     double azimuthDegrees;
 
     @Override
@@ -71,19 +64,8 @@ public class VMSTest extends AppCompatActivity implements SensorEventListener{
         left_arrow = findViewById(R.id.arrow_left);
         right_arrow = findViewById(R.id.arrow_right);
 
-        /*
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this,
-                        android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getBaseContext(), "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
-            return;
-        }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
-        //isLocationEnabled();
-        locationProvider = locationManager.getProvider(LocationManager.GPS_PROVIDER);
-        */
+        previous = findViewById(R.id.previous);
+        current = findViewById(R.id.current);
 
         sensorManager = (SensorManager) getApplicationContext().getSystemService(Context.SENSOR_SERVICE);
         sensorAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -91,6 +73,8 @@ public class VMSTest extends AppCompatActivity implements SensorEventListener{
 
         metronome = MediaPlayer.create(this, R.raw.bpm50);
         metronome.start();
+
+        updateSpeed();
     }
 
     @Override
@@ -111,6 +95,7 @@ public class VMSTest extends AppCompatActivity implements SensorEventListener{
         super.onPause();
         sensorManager.unregisterListener(this);
         metronome.stop();
+        timerHandler.removeCallbacks(updater);
     }
 
     @Override
@@ -143,11 +128,11 @@ public class VMSTest extends AppCompatActivity implements SensorEventListener{
             SensorManager.getOrientation(remapMatrix, orientationValues);
 
             azimuth = orientationValues[0];
-            azimuthDegrees = Math.toDegrees(azimuth);
+            azimuthDegrees = Math.toDegrees(azimuth); // azimuth degrees = -1 * y-rotation in virtual sensors
+
+            setAzimuthDegrees(azimuthDegrees);
 
             //azimuthText.setText(String.format("%1.2f", azimuthDegrees));
-
-            // azimuth degrees = -1 * y-rotation in virtual sensors
 
             // If the user has turned 75 degrees to the left, display right arrow
             if (azimuthDegrees < -75) {
@@ -163,42 +148,49 @@ public class VMSTest extends AppCompatActivity implements SensorEventListener{
 
     }
 
-    /*
-     LocationListener locationListener = new LocationListener() {
-        private Location mLastLocation;
+    // Informs the user of their speed.
+    Runnable updater;
+    final Handler timerHandler = new Handler();
+    void updateSpeed() {
+        updater = new Runnable() {
+            @Override
+            public void run() {
 
-        @Override
-        public void onLocationChanged(Location pCurrentLocation) {
-            //manually calculate speed
-            double speed = 0;
-            if (this.mLastLocation != null)
-                speed = Math.sqrt(
-                        Math.pow(pCurrentLocation.getLongitude() - mLastLocation.getLongitude(), 2)
-                                + Math.pow(pCurrentLocation.getLatitude() - mLastLocation.getLatitude(), 2)
-                ) / (pCurrentLocation.getTime() - this.mLastLocation.getTime());
-            //if there is speed from location
-            if (pCurrentLocation.hasSpeed())
-                //get location speed
-                speed = pCurrentLocation.getSpeed();
-            this.mLastLocation = pCurrentLocation;
-            speedText.setText(String.format("%1.2f", speed));
-        }
+                setAzimuthDegrees(getAzimuthDegrees());
 
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
+                previous.setText(String.format("%1f", getPrevAzimuthDegrees()));
+                current.setText(String.format("%1f", getAzimuthDegrees()));
 
-        }
+                if (getPrevAzimuthDegrees() != 1000) {
+                    if (Math.abs(getPrevAzimuthDegrees() - getAzimuthDegrees()) > 100)
+                        speedText.setText("Slow Down");
+                    else if (Math.abs(getPrevAzimuthDegrees() - getAzimuthDegrees()) < 60)
+                        speedText.setText("Speed Up");
+                    else
+                        speedText.setText("Good Speed");
+                }
 
-        @Override
-        public void onProviderEnabled(String s) {
+                setPrevAzimuthDegrees(getAzimuthDegrees());
+                timerHandler.postDelayed(updater, 600); // Post execution every .6 seconds
+            }
+        };
+        timerHandler.post(updater);
+    }
 
-        }
+    public void setPrevAzimuthDegrees(double prevAzimuthDegrees){
+        this.prevAzimuthDegrees = prevAzimuthDegrees;
+    }
 
-        @Override
-        public void onProviderDisabled(String s) {
+    public double getPrevAzimuthDegrees() {
+        return this.prevAzimuthDegrees;
+    }
 
-        }
-    };
-     */
+    public void setAzimuthDegrees(double azimuthDegrees){
+        this.azimuthDegrees = azimuthDegrees;
+    }
+
+    public double getAzimuthDegrees() {
+        return this.azimuthDegrees;
+    }
 
 }
