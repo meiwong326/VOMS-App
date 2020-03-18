@@ -17,7 +17,8 @@
         android:id="@+id/baseline_table"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/main_activity_button"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:stretchColumns="*"
         android:padding="5dip">
 

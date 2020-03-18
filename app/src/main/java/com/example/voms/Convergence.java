@@ -170,7 +170,7 @@ public class Convergence extends AppCompatActivity {
         @Override
         public void onMissing(Detector.Detections<Face> detections) {
             super.onMissing(detections);
-            showStatus("face not detected");
+            showStatus("\nface not detected");
         }
 
         @Override
