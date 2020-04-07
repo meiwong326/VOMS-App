@@ -1,3 +1,4 @@
 include ':app'
 rootProject.name='VOMS'
 include ':OpenCV'
+include ':openCVLibrary3410'
