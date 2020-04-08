@@ -46,9 +46,15 @@ import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfRect;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.objdetect.CascadeClassifier;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,14 +72,43 @@ public class Convergence extends AppCompatActivity implements CameraBridgeViewBa
     float angleX, angleY;
 
     JavaCameraView javaCameraView;
-    Mat mRgba, mRgbat;
+    File cascadeFile;
+    CascadeClassifier faceDetector;
+
+
+
+    Mat mRgba, mRgbaT, mRgbaF, mGray, mGrayT, mGrayF;
 
     BaseLoaderCallback baseLoaderCallback = new BaseLoaderCallback(this) {
         @Override
-        public void onManagerConnected(int status) {
+        public void onManagerConnected(int status) throws IOException {
             switch (status) {
                 case BaseLoaderCallback.SUCCESS: {
                     javaCameraView.enableView();
+
+                    InputStream inputStream = getResources().openRawResource(R.raw.haarcascade_frontalface_alt2);
+                    File cascadeDir = getDir("cascade", Context.MODE_PRIVATE);
+                    cascadeFile = new File(cascadeDir, "haarcascade_frontalface_alt2.xml");
+
+                    FileOutputStream fileOutputStream = new FileOutputStream(cascadeFile);
+
+                    byte[] buffer = new byte[4096];
+                    int bytesRead;
+
+                    while((bytesRead = inputStream.read(buffer)) != -1) {
+                        fileOutputStream.write(buffer, 0, bytesRead);
+                    }
+
+                    inputStream.close();
+                    fileOutputStream.close();
+
+                    faceDetector = new CascadeClassifier(cascadeFile.getAbsolutePath());
+
+                    if (faceDetector.empty())
+                        faceDetector = null;
+                    else
+                        cascadeDir.delete();
+
                     break;
                 }
                 default: {
@@ -221,20 +256,38 @@ public class Convergence extends AppCompatActivity implements CameraBridgeViewBa
     @Override
     public void onCameraViewStarted(int width, int height) {
         mRgba = new Mat(height, width, CvType.CV_8UC4);
+        mGray = new Mat(height, width, CvType.CV_8UC4);
     }
 
     @Override
     public void onCameraViewStopped() {
         mRgba.release();
+        mGray.release();
     }
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         mRgba = inputFrame.rgba();
-        mRgbat = mRgba.t();
-        Core.flip(mRgba.t(), mRgbat, 1);
-        Imgproc.resize(mRgbat, mRgbat, mRgba.size());
-        return mRgbat;
+        mGray = inputFrame.gray();
+
+/*        Core.transpose(mRgba, mRgbaT);
+        Imgproc.resize(mRgbaT, mRgbaF, mRgba.size(), 0, 0, 0);
+        Core.flip(mRgbaF, mRgba, -1);
+
+        Core.transpose(mGray, mGrayT);
+        Imgproc.resize(mGrayT, mGrayF, mGray.size(), 0, 0, 0);
+        Core.flip(mGrayF, mGray, -1);*/
+
+        MatOfRect faceDetections = new MatOfRect();
+        faceDetector.detectMultiScale(mRgba, faceDetections);
+
+        for (Rect rect: faceDetections.toArray()) {
+            Imgproc.rectangle(mRgba, new Point(rect.x, rect.y),
+                    new Point(rect.x + rect.width, rect.y + rect.height),
+                    new Scalar(255, 0, 0));
+        }
+
+        return mRgba;
     }
 
     @Override
@@ -263,7 +316,13 @@ public class Convergence extends AppCompatActivity implements CameraBridgeViewBa
         super.onResume();
         if (OpenCVLoader.initDebug()) {
             Log.d(TAG, "OpenCV configuration was a success");
-            baseLoaderCallback.onManagerConnected(BaseLoaderCallback.SUCCESS);
+
+            try {
+                baseLoaderCallback.onManagerConnected(BaseLoaderCallback.SUCCESS);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
         else{
             Log.d(TAG, "OpenCV configuration was NOT a success");
