@@ -265,19 +265,20 @@ public class Convergence extends AppCompatActivity implements CameraBridgeViewBa
         mGray.release();
     }
 
-    @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        mRgba = inputFrame.rgba();
-        mGray = inputFrame.gray();
+        //rotate clockwise
+        Core.flip(inputFrame.rgba().t(), mRgba,1);
+        Core.flip(inputFrame.gray().t(), mGray,1);
 
-/*        Core.transpose(mRgba, mRgbaT);
-        Imgproc.resize(mRgbaT, mRgbaF, mRgba.size(), 0, 0, 0);
-        Core.flip(mRgbaF, mRgba, -1);
+        mRgba = Feature_DetectionNATIVE(mRgba,mGray);
 
-        Core.transpose(mGray, mGrayT);
-        Imgproc.resize(mGrayT, mGrayF, mGray.size(), 0, 0, 0);
-        Core.flip(mGrayF, mGray, -1);*/
+        //rotate counter clockwise
+        Core.flip(mRgba.t(), mRgba,0);
 
+        return mRgba;
+    }
+
+    public Mat Feature_DetectionNATIVE(Mat mRgba, final Mat Gray) {
         MatOfRect faceDetections = new MatOfRect();
         faceDetector.detectMultiScale(mRgba, faceDetections);
 
@@ -286,7 +287,6 @@ public class Convergence extends AppCompatActivity implements CameraBridgeViewBa
                     new Point(rect.x + rect.width, rect.y + rect.height),
                     new Scalar(255, 0, 0));
         }
-
         return mRgba;
     }
 
