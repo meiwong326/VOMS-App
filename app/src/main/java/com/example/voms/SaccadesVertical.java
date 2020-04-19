@@ -1,6 +1,6 @@
 package com.example.voms;
 
-/* t the moment, there is no method to analyze vertical saccadic eye movement. Below, the method used
+/* At the moment, there is no method to analyze vertical saccadic eye movement. Below, the method used
 is the haar cascade, but it is primarily used in horizontal scenarios. Another issue with this method is
 more accurate in its analysis using the left eye algorithm for both the left and right eyes instead of
 using the left haar cascade for the left eye and the right haar cascade for the right eye. Below, the
