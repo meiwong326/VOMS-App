@@ -14,6 +14,23 @@
         android:textStyle="bold"
         android:layout_centerHorizontal="true"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentRight="true"
+        android:textSize="20dp"/>
+
+
     <Button
         android:id="@+id/saccades_horizontal_button"
         android:layout_width="145dp"
@@ -21,5 +38,31 @@
         android:text="Next"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:id="@+id/arrow_left"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/arrow_left"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageView
+        android:id="@+id/arrow_right"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/arrow_right"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/RotationAngleH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:text="TextView" />
 
 </RelativeLayout>
