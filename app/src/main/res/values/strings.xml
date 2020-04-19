@@ -5,11 +5,17 @@
     <string name="dizziness">Dizziness</string>
     <string name="nausea">Nausea</string>
     <string name="fogginess">Fogginess</string>
-    <string name="convergence_instructions"><![CDATA[<insert instructions>]]></string>
+    <string name="convergence_instructions"><![CDATA[Hold the phone at arm\'s length and
+    slowly bring the phone toward your nose while focusing on the \'X\'.
+    Stop when double vision occurs.
+    Record the distance on the screen.
+    Repeat three times.]]></string>
     <string name="saccades_horizontal_instructions"><![CDATA[<insert instructions>]]></string>
     <string name="saccades_vertical_instructions"><![CDATA[<insert instructions>]]></string>
     <string name="smooth_pursuits_instructions"><![CDATA[<insert instructions>]]></string>
-    <string name="vms_instructions"><![CDATA[<insert instructions>]]></string>
+    <string name="vms_instructions"><![CDATA[Hold the phone with your arms outstretch.
+    Moving as a unit, rotate your head, eyes, and torso in the direction of the arrows.
+    Move with the beat of the metronome. Complete 5 rotations.]]></string>
     <string name="vor_horizontal_instructions"><![CDATA[<insert instructions>]]></string>
     <string name="vor_vertical_instructions"><![CDATA[<insert instructions>]]></string>
 </resources>
