@@ -19,7 +19,9 @@
         android:layout_height="wrap_content"
         android:text="@string/vms_instructions"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:padding="10sp"
+        android:textSize="18dp"/>
 
     <Button
         android:id="@+id/vms_instructions_button"

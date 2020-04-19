@@ -31,14 +31,14 @@
         android:layout_centerVertical="true"
         android:textSize="20dp"/>
 
-    <org.opencv.android.JavaCameraView
+<!--    <org.opencv.android.JavaCameraView
         android:id="@+id/camera_view"
-        android:layout_width="150dp"
-        android:layout_height="200dp"
+        android:layout_width="600dp"
+        android:layout_height="400dp"
         android:layout_above="@+id/convergence_button"
         android:layout_centerHorizontal="true"
         android:visibility="visible"
-        app:camera_id="front"/>
+        app:camera_id="front"/>-->
 
     <Button
         android:id="@+id/convergence_button"
